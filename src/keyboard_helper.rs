@@ -9,13 +9,18 @@ lazy_static! {
         ('-', vec![Key::Minus]),
         ('_', vec![Key::LeftShift, Key::Minus]),
         ('.', vec![Key::Dot]),
-        ('"', vec![Key::Apostrophe]),
+        ('"', vec![Key::LeftShift, Key::Apostrophe]),
         ('\'', vec![Key::Apostrophe]),
         ('/', vec![Key::Slash]),
         ('\\', vec![Key::BackSlash]),
         (' ', vec![Key::Space]),
         (':', vec![Key::LeftShift, Key::Semicolon]),
-        ('$', vec![Key::LeftShift, Key::Num4])
+        ('$', vec![Key::LeftShift, Key::Num4]),
+        ('(', vec![Key::LeftShift, Key::Num9]),
+        (')', vec![Key::LeftShift, Key::Num0]),
+        ('{', vec![Key::LeftShift, Key::LeftBrace]),
+        ('}', vec![Key::LeftShift, Key::RightBrace]),
+        ('=', vec![Key::Equal])
     ]);
 }
 

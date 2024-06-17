@@ -28,7 +28,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "hid_test"
+name = "hid_simulator"
 version = "0.1.0"
 dependencies = [
  "hidg",
