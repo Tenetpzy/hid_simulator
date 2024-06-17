@@ -1,0 +1,10 @@
+[package]
+name = "hid_test"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+hidg = "0.2.0"
+log = "0.4.21"
+simple_logger = "5.0.0"
+lazy_static = "1.4.0"
