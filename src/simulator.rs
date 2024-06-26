@@ -2,8 +2,7 @@ use std::{thread::sleep, time::Duration};
 use hidg::{Key, Result};
 
 use crate::keyboard_helper::KeyboardHelper;
-
-pub const DRIVER_LETTER_VAR_NAME: &str = "driveLetter";
+use crate::DRIVER_LETTER_VAR_NAME;
 
 pub struct KeySimulator<'a, 'b> {
     helper: &'a mut KeyboardHelper<'b>
