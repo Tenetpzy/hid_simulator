@@ -20,7 +20,10 @@ lazy_static! {
         (')', vec![Key::LeftShift, Key::Num0]),
         ('{', vec![Key::LeftShift, Key::LeftBrace]),
         ('}', vec![Key::LeftShift, Key::RightBrace]),
-        ('=', vec![Key::Equal])
+        ('=', vec![Key::Equal]),
+        (';', vec![Key::Semicolon]),
+        ('>', vec![Key::LeftShift, Key::Dot]),
+        ('&', vec![Key::LeftShift, Key::Num7])
     ]);
 }
 
@@ -83,11 +86,17 @@ impl<'a> KeyboardHelper<'a> {
         Ok(())
     }
 
-    /// 发送cmd+ENTER，cmd中的每个字符单独按下
-    pub fn press_line(&mut self, cmd: &str) -> Result<()> {
+    /// 发送cmd，cmd中的每个字符单独按下
+    pub fn press_cmd(&mut self, cmd: &str) -> Result<()> {
         for ch in cmd.chars() {
             self.press_char(ch)?;
         }
+        Ok(())
+    }
+
+    /// 发送cmd+ENTER，cmd中的每个字符单独按下
+    pub fn press_line(&mut self, cmd: &str) -> Result<()> {
+        self.press_cmd(cmd)?;
         self.press_one(Key::Enter)?;
         Ok(())
     }
